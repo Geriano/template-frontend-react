@@ -1,0 +1,96 @@
+{
+  "login": {
+    "path": "/login"
+  },
+  "register": {
+    "path": "/register"
+  },
+  "logout": {
+    "path": "/logout"
+  },
+
+  "update-user-general-information": {
+    "path": "/update-user-general-information"
+  },
+  "remove-profile-photo": {
+    "path": "/remove-profile-photo"
+  },
+  "update-user-password": {
+    "path": "/update-user-password"
+  },
+
+  "permission.all": {
+    "path": "/superuser/permission"
+  },
+  "permission.store": {
+    "path": "/superuser/permission"
+  },
+  "permission.update": {
+    "path": "/superuser/permission/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  },
+  "permission.destroy": {
+    "path": "/superuser/permission/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  },
+
+  "role.all": {
+    "path": "/superuser/role"
+  },
+  "role.paginate": {
+    "path": "/superuser/role/paginate"
+  },
+  "role.store": {
+    "path": "/superuser/role"
+  },
+  "role.update": {
+    "path": "/superuser/role/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  },
+  "role.destroy": {
+    "path": "/superuser/role/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  },
+
+  "user.all": {
+    "path": "/superuser/user"
+  },
+  "user.paginate": {
+    "path": "/superuser/user/paginate"
+  },
+  "user.store": {
+    "path": "/superuser/user"
+  },
+  "user.update": {
+    "path": "/superuser/user/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  },
+  "user.destroy": {
+    "path": "/superuser/user/{id}",
+    "params": {
+      "id": {
+        "required": true
+      }
+    }
+  }
+}
