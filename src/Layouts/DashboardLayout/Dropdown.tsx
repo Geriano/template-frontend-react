@@ -1,6 +1,8 @@
 import classNames from "classnames"
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "../../hooks"
+import { logout as signout } from '../../Store/auth'
 
 export function Link(props: React.PropsWithChildren<{ [key: string]: any }>) {
   return (
@@ -14,8 +16,13 @@ export function Link(props: React.PropsWithChildren<{ [key: string]: any }>) {
 }
 
 export default function Dropdown() {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const logout = () => navigate('/login')
+  const logout = () => {
+    dispatch(signout())
+      .unwrap()
+      .then(() => navigate('/login'))
+  }
 
   return (
     <>

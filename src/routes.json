@@ -8,6 +8,9 @@
   "logout": {
     "path": "/logout"
   },
+  "user": {
+    "path": "/user"
+  },
 
   "update-user-general-information": {
     "path": "/update-user-general-information"

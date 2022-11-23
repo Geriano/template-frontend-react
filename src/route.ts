@@ -17,6 +17,7 @@ export default function<
       throw Error(`Missing parameter [${key}] for route [${name}]`)
     })
   }
+
   const base = import.meta.env.VITE_BACKEND_URL
   const { path, param: availables } = routes[name]
   const args: AnyObject = {}

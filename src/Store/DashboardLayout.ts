@@ -5,7 +5,7 @@ export const name = 'DashboardLayout'
 export const initialState = {
   open: {
     sidebar: Boolean(Number(localStorage.getItem('sidebar_open'))),
-    dropdown: Boolean(Number(localStorage.getItem('dropdown_open'))),
+    dropdown: false,
   },
 }
 
@@ -28,8 +28,6 @@ export const slice = createSlice({
       } else {
         state.open.dropdown = !!action.payload
       }
-
-      localStorage.setItem('dropdown_open', Number(state.open.sidebar).toString())
     },
   },
 })
