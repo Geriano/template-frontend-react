@@ -35,7 +35,7 @@ export default function AuthLayout() {
         { ready && <Outlet /> }
       </div>
 
-      {flashes.length && (
+      {flashes.filter(flash => flash).length > 0 && (
         <div className="fixed top-0 right-0 w-full max-w-xs h-fit flex flex-col space-y-2 p-4">
           { flashes.filter(flash => flash).map((flash, i) => (
             <div key={i} className={classNames("bg-white border-l-8 px-4 py-2 rounded-md shadow", {
