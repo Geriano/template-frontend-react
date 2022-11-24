@@ -39,7 +39,7 @@ export default function Login() {
         }
         footer={
           <div className="flex items-center justify-end p-2">
-            <Button type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
+            <Button disabled={processing} type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
               <i className="mdi mdi-check" />
               <p className="capitalize font-medium">
                 login
