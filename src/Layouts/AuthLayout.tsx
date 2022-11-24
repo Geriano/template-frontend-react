@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { relog } from "../Store/auth";
 
@@ -9,11 +9,15 @@ export default function AuthLayout() {
   const { value: flashes } = useAppSelector(state => state.flash)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [ ready, set ] = useState(false)
+
+  const search = new URLSearchParams(location.search)
+  const to = search.get('from') || '/'
 
   useEffect(() => {
     if (authenticated) {
-      navigate('/')
+      navigate(to)
     } else {
       if (token) {
         dispatch(relog())
@@ -26,7 +30,7 @@ export default function AuthLayout() {
   }, [])
 
   if (authenticated) {
-    return <Navigate to="/" />
+    return <Navigate to={to} />
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../Components/Button";
 import { Card } from "../../Components/Card";
 import Input from "../../Components/Input";
@@ -10,6 +10,7 @@ export default function Login() {
   const { processing, form, errors } = useAppSelector(state => state.login)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const input = (field: keyof typeof form, target: HTMLInputElement) => dispatch(f({
     field,
@@ -21,7 +22,11 @@ export default function Login() {
 
     dispatch(login())
       .unwrap()
-      .then(() => navigate('/'))
+      .then(() => {
+        const search = new URLSearchParams(location.search)
+
+        navigate(search.get('from') || '/')
+      })
   }
 
   return (
@@ -46,7 +51,6 @@ export default function Login() {
         <div className="flex flex-col space-y-2 p-4">
           <Input 
             label="Username"
-            name="username"
             value={form.username}
             onInput={e => input('username', e.target as HTMLInputElement)}
             autoFocus
