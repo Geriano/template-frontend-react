@@ -5,6 +5,7 @@ import { dropdown, sidebar } from "../../Store/DashboardLayout"
 import Dropdown from './Dropdown'
 
 export default function Topbar() {
+  const { user } = useAppSelector(state => state.auth)
   const { dropdown: open } = useAppSelector(state => state.DashboardLayout.open)
   const dispatch = useAppDispatch()
   const toggle = () => dispatch(dropdown())
@@ -32,6 +33,7 @@ export default function Topbar() {
       </div>
       
       <div className="relative w-full max-w-xs h-14 flex items-center justify-end space-x-2">
+        <p className="capitalize">{user.name}</p>
         <i 
           ref={trigger}
           onClick={toggle}
