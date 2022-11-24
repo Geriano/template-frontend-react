@@ -4,6 +4,7 @@ import React from 'react'
 interface Props {
   className?: string
   type?: 'button'|'submit'|'reset'
+  disabled?: boolean
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 

@@ -9,7 +9,7 @@ interface Props {
 
 export function Card({ className, header, footer, children }: React.PropsWithChildren<Props>) {
   return (
-    <div className={classNames("w-full h-full rounded-md bg-white shadow", className)}>
+    <div className={classNames("w-full h-full rounded-md bg-white shadow border border-gray-100", className)}>
       { header && (
         <div className="bg-gray-100 w-full rounded-t-md">
           { header }
@@ -31,3 +31,5 @@ export function Card({ className, header, footer, children }: React.PropsWithChi
     </div>
   )
 }
+
+export default Card

@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
 
-export interface FromValidationErrorResponse {
+export interface FromValidationErrorResponse<T = string> {
   errors: {
-    field: string
+    field: T
     message: string
   }[]
 }

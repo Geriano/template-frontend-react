@@ -15,6 +15,7 @@ import DashboardLayout from './Layouts/DashboardLayout';
 import Dashboard from './Pages/Dashboard';
 import AuthLayout from './Layouts/AuthLayout';
 import Login from './Pages/Auth/Login';
+import Profile from './Pages/Profile/Index';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path='/' element={<DashboardLayout />}>
               <Route path='/' element={<Navigate to="/dashboard" />} />
               <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/profile' element={<Profile />} />
             </Route>
 
             <Route path='/' element={<AuthLayout />}>

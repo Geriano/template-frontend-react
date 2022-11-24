@@ -3,8 +3,9 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../hooks"
 import { logout as signout } from '../../Store/auth'
+import { Link } from "react-router-dom"
 
-export function Link(props: React.PropsWithChildren<{ [key: string]: any }>) {
+export function Item(props: React.PropsWithChildren<{ [key: string]: any }>) {
   return (
     <div
       {...props}
@@ -26,17 +27,19 @@ export default function Dropdown() {
 
   return (
     <>
-      <Link>
-        <i className="mdi mdi-account" />
-        <p>Profile</p>
+      <Link to="/profile">
+        <Item>
+          <i className="mdi mdi-account" />
+          <p>Profile</p>
+        </Item>
       </Link>
 
-      <Link
+      <Item
         onClick={logout}
       >
         <i className="mdi mdi-logout" />
         <p>Logout</p>
-      </Link>
+      </Item>
     </>
   )
 }

@@ -3,6 +3,7 @@ import DashboardLayout from "./Store/DashboardLayout";
 import auth from "./Store/auth";
 import login from "./Store/login";
 import flash from "./Store/flash";
+import profile from "./Store/profile";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth,
     login,
     flash,
+    profile,
   },
   middleware: middleware => middleware({
     serializableCheck: false,
