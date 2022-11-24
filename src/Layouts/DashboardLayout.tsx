@@ -4,7 +4,7 @@ import Main from "./DashboardLayout/Main";
 import Sidebar from "./DashboardLayout/Sidebar";
 
 export default function DashboardLayout() {
-  const { authenticated, user } = useAppSelector(state => state.auth)
+  const { authenticated } = useAppSelector(state => state.auth)
 
   if (!authenticated) {
     return <Navigate to="/login" />

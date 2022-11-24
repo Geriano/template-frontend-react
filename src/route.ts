@@ -8,7 +8,7 @@ const sanitize = (url: string) => url.replace(/\/+/g, '/').replace(/^\/|\/$/g, '
 export default function<
   T extends keyof typeof routes, 
   K extends {
-    [key in keyof Routes[T]['param']]: any
+    [key in keyof Routes[T]['params']]: any
   }
 >(name: T, params?: K): string {
   const missingRouteParameter = (key: string) => {
@@ -19,7 +19,7 @@ export default function<
   }
 
   const base = import.meta.env.VITE_BACKEND_URL
-  const { path, param: availables } = routes[name]
+  const { path, params: availables } = routes[name]
   const args: AnyObject = {}
   const queries: AnyObject = {}
   

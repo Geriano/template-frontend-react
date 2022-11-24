@@ -1,11 +1,11 @@
 export interface Route {
   path: string
-  param: undefined
+  params: undefined
 }
 
 export interface RouteWithParam<T extends string[]> {
   path: string
-  param: {
+  params: {
     [key in Extract<T, string>]: {
       required: boolean
     }
