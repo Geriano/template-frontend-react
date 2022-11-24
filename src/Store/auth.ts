@@ -13,16 +13,14 @@ export interface State {
 export const relog = createAsyncThunk('auth/relog', async (_, api) => {
   const { auth } = api.getState() as RootState
 
-  if (auth.processing) {
-    return api.rejectWithValue(undefined)
-  }
-
-  api.dispatch(process())
-  
-  try {
-    return await Auth.relog(auth.token)
-  } catch (e) {
-    return api.rejectWithValue(e)
+  if (!auth.processing) {
+    api.dispatch(process())
+    
+    try {
+      return await Auth.relog(auth.token)
+    } catch (e) {
+      return api.rejectWithValue(e)
+    }
   }
 })
 
@@ -80,14 +78,19 @@ export const slice = createSlice({
     })
 
     builder.addCase(relog.fulfilled, (state: State, action) => {
-      state.authenticated = true
-      state.user = action.payload.response
-      
-      localStorage.setItem('token', state.token)
-      axios.defaults.headers.common.Authorization = `Bearer ${state.token}`
+      if (action.payload) {
+        state.authenticated = true
+        state.user = action.payload.response
+        
+        axios.defaults.headers.common.Authorization = `Bearer ${state.token}`
+        localStorage.setItem('token', state.token)
+      }
+
+      state.processing = false
     })
 
     builder.addCase(relog.rejected, (state: State) => {
+      state.processing = false
       localStorage.removeItem('token')
     })
   },
