@@ -85,6 +85,7 @@ export const updateGeneralInformation = createAsyncThunk('profile/update/informa
     ))
 
     api.dispatch(relog())
+    api.dispatch(clearError('general'))
   } catch (e) {
     if (e instanceof AxiosError) {
       const { status, data } = e.response!
@@ -116,6 +117,9 @@ export const updatePassword = createAsyncThunk('profile/update/password', async 
     api.dispatch(success(
       response.message
     ))
+
+    api.dispatch(clearError('password'))
+    api.dispatch(resetForm('password'))
   } catch (e) {
     if (e instanceof AxiosError) {
       const { status, data } = e.response!
@@ -157,6 +161,12 @@ export const slice = createSlice({
       const { field, value } = action.payload
       state.password.errors[field] = value
     },
+    clearError<T extends 'general'|'password'>(state: State, action: PayloadAction<T>) {
+      state[action.payload].errors = initialState[action.payload].errors
+    },
+    resetForm<T extends 'general'|'password'>(state: State, action: PayloadAction<T>) {
+      state[action.payload].form = initialState[action.payload].form
+    },
   },
   extraReducers: builder => {
     const process = (state: State, value: boolean = true) => {
@@ -173,6 +183,6 @@ export const slice = createSlice({
   },
 })
 
-export const { generalForm, generalError, passwordForm, passwordError } = slice.actions
+export const { generalForm, generalError, passwordForm, passwordError, clearError, resetForm } = slice.actions
 
 export default slice.reducer
