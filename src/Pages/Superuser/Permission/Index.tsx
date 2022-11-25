@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import Button from "../../../Components/Button";
 import Card from "../../../Components/Card";
+import Input from "../../../Components/Input";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { all, destroy, edit, toggle } from "../../../Store/permission";
+import { all, destroy, edit, searching, toggle } from "../../../Store/permission";
 import Form from "./Form";
 
 export default function Permission() {
@@ -18,7 +19,7 @@ export default function Permission() {
   return (
     <>
       <Card>
-        <Card.Header className="flex items-center space-x-2 p-2">
+        <Card.Header className="flex items-center space-x-2 justify-between p-2">
           <Button.Success 
             onClick={() => {
               dispatch(toggle(true))
@@ -29,6 +30,18 @@ export default function Permission() {
               create
             </p>
           </Button.Success>
+
+          <div className="w-full max-w-xs">
+            <Input 
+              onInput={e => {
+                dispatch(searching(
+                  (e.target as HTMLInputElement).value
+                ))
+              }}
+              color="gray-100"
+              label="Search"
+            />
+          </div>
         </Card.Header>
 
         <div className="flex-wrap p-4">
