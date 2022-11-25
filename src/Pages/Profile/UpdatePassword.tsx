@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { passwordForm, updatePassword } from "../../Store/profile";
-import Button from "../../Components/Button";
+import { Primary } from "../../Components/Button";
 import Card from "../../Components/Card";
 import Input from "../../Components/Input";
 
@@ -65,15 +65,15 @@ export default function UpdatePassword() {
 
           <Card.Footer>
             <div className="flex items-center justify-end p-2">
-              <Button 
+              <Primary 
                 disabled={processing} 
                 type="submit" 
-                className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white px-6 py-2"
+                className="px-6 py-2"
               >
                 <p className="capitalize font-medium">
                   update
                 </p>
-              </Button>
+              </Primary>
             </div>
           </Card.Footer>
         </Card>

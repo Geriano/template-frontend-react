@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { generalForm, removeProfilePhoto, setGeneralInformationFromUser, updateGeneralInformation } from "../../Store/profile";
-import Button from "../../Components/Button";
+import { Primary } from "../../Components/Button";
 import Card from "../../Components/Card";
 import Input from "../../Components/Input";
 import route from '../../route';
-import { Dropdown } from 'flowbite-react';
 
 export default function GeneralInformation() {
   const { user } = useAppSelector(state => state.auth)
@@ -82,14 +81,14 @@ export default function GeneralInformation() {
 
               <div className="absolute bottom-0 right-0">
                 <div className="relative">
-                  <Button 
+                  <Primary 
                     onClick={() => set(!open)}
                     className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white bg-opacity-80 rounded-full px-2"
                   >
                     <i 
                       className="mdi mdi-dots-vertical" 
                     />
-                  </Button>
+                  </Primary>
 
                   {open && (
                     <div className="absolute top-7 -right-4 w-32 p-2 bg-white border rounded-md z-10">
@@ -151,7 +150,7 @@ export default function GeneralInformation() {
 
           <Card.Footer>
             <div className="flex items-center justify-end p-2">
-              <Button 
+              <Primary 
                 disabled={processing} 
                 type="submit" 
                 className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white px-6 py-2"
@@ -159,7 +158,7 @@ export default function GeneralInformation() {
                 <p className="capitalize font-medium">
                   update
                 </p>
-              </Button>
+              </Primary>
             </div>
           </Card.Footer>
         </Card>

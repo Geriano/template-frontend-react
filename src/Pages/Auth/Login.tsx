@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../../Components/Button";
+import { Primary } from "../../Components/Button";
 import { Card } from "../../Components/Card";
 import Input from "../../Components/Input";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -63,12 +63,12 @@ export default function Login() {
 
         <Card.Footer>
           <div className="flex items-center justify-end p-2">
-            <Button disabled={processing} type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
+            <Primary disabled={processing} type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
               <i className="mdi mdi-check" />
               <p className="capitalize font-medium">
                 login
               </p>
-            </Button>
+            </Primary>
           </div>
         </Card.Footer>
       </Card>
