@@ -16,6 +16,10 @@ export const useRole = () => {
     }
 
     has(names: string|string[]) {
+      if (this.roles.filter(role => role.name === 'superuser').length > 0) {
+        return true
+      }
+
       if (Array.isArray(names)) {
         for (const name of names) {
           if (this.has(name)) {
@@ -44,6 +48,10 @@ export const usePermission = () => {
     }
 
     has(names: string|string[]) {
+      if (user.roles.filter(role => role.name === 'superuser').length > 0) {
+        return true
+      }
+
       if (Array.isArray(names)) {
         for (const name of names) {
           if (this.has(name)) {
