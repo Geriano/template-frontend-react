@@ -6,6 +6,7 @@ export interface Routes {
   "logout": Route,
   "user": Route,
 
+  "static": RouteWithParam<'path'>,
   "update-user-general-information": Route,
   "remove-profile-photo": Route,
   "update-user-password": Route,

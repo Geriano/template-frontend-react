@@ -12,6 +12,15 @@
     "path": "/user"
   },
 
+  "static": {
+    "path": "/{path}",
+    "params": {
+      "path": {
+        "required": true
+      }
+    }
+  },
+
   "update-user-general-information": {
     "path": "/update-user-general-information"
   },
