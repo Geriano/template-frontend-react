@@ -24,9 +24,9 @@ export default function DashboardLayout() {
       </div>
 
       {flashes.filter(flash => flash).length > 0 && (
-        <div className="fixed top-0 right-0 w-full max-w-xs h-fit flex flex-col space-y-2 p-4 z-20">
+        <div className="fixed top-0 right-0 w-full max-w-xs h-fit flex flex-col space-y-2 p-4 z-20 text-sm">
           { flashes.filter(flash => flash).map((flash, i) => (
-            <div key={i} className={classNames("bg-white border-l-8 px-4 py-2 rounded-md shadow", {
+            <div key={i} className={classNames("bg-white border-l-8 px-4 py-2 rounded-md shadow first-letter:capitalize", {
               'border-success-0': flash!.type === 'success',
               'border-danger-0': flash!.type === 'error',
               'border-info-0': flash!.type === 'info',
