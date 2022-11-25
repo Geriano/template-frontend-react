@@ -22,7 +22,7 @@ export default function Topbar() {
   }, [open])
 
   return (
-    <div className="sticky top-0 left-0 w-full h-14 flex-none flex items-center justify-between md:justify-end px-4 bg-gray-50 shadow">
+    <div className="sticky top-0 left-0 w-full h-14 flex-none flex items-center justify-between md:justify-end px-4 bg-gray-50 shadow z-20">
       <div className="md:hidden flex items-center justify-center">
         <i
           onClick={() => dispatch(sidebar())}
