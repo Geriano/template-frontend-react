@@ -10,12 +10,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import './index.css'
+import axios from 'axios';
 
 import DashboardLayout from './Layouts/DashboardLayout';
 import Dashboard from './Pages/Dashboard';
 import AuthLayout from './Layouts/AuthLayout';
 import Login from './Pages/Auth/Login';
 import Profile from './Pages/Profile/Index';
+
+axios.defaults.headers['Content-Type'] = 'multipart/form-data'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
