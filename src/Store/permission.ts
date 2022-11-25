@@ -198,6 +198,10 @@ export const slice = createSlice({
     const processed = (state: State) => {
       state.processing = false
       state.open = false
+
+      if (state.form.id || state.form.name) {
+        state.open = true
+      }
     }
 
     builder.addCase(all.fulfilled, processed)
