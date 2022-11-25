@@ -40,7 +40,7 @@ export default function Form() {
                 autoFocus
               />
 
-              <p className="text-danger text-xs">
+              <p className="text-danger-0 text-xs text-right">
                 {errors.name}
               </p>
             </div>
@@ -50,7 +50,7 @@ export default function Form() {
 
       <Modal.Footer className="px-2 py-1">
         <div className="flex items-center justify-end w-full">
-          <Primary disabled={processing} type="button" form="form" className="px-6 py-2">
+          <Primary disabled={processing} onClick={submit} type="button" form="form" className="px-6 py-2">
             <p className="capitalize font-medium">
               {form.id ? 'Update' : 'Create'}
             </p>
