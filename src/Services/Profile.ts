@@ -20,12 +20,18 @@ export const updateGeneralInformation = async (form: GeneralInformationForm) => 
   return { status, response }
 }
 
-export const updatePassword =async (form: UpdatePasswordForm) => {
+export const updatePassword = async (form: UpdatePasswordForm) => {
   const { status, data: response } = await axios.patch(route('update-user-password'), form)
 
   return { status, response }
 }
 
+export const removeProfilePhoto = async () => {
+  const { status, data: response } = await axios.delete(route('remove-profile-photo'))
+
+  return { status, response }
+}
+
 export default {
-  updateGeneralInformation, updatePassword,
+  updateGeneralInformation, updatePassword, removeProfilePhoto,
 }

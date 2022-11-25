@@ -141,6 +141,36 @@ export const updatePassword = createAsyncThunk('profile/update/password', async 
   }
 })
 
+export const removeProfilePhoto = createAsyncThunk('profile/remove/photo', async (_, api) => {
+  try {
+    const { response } = await Profile.removeProfilePhoto()
+
+    api.dispatch(success(
+      response.message
+    ))
+    
+    api.dispatch(relog())
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      const { status, data } = e.response!
+
+      if (status === 422) {
+        const { errors } = data as FromValidationErrorResponse<keyof UpdatePasswordForm>
+        errors.forEach(error => {
+          api.dispatch(passwordError({
+            field: error.field,
+            value: error.message,
+          }))
+        })
+      } else {
+        return api.rejectWithValue(e)
+      }
+    } else {
+      return api.rejectWithValue(e)
+    }
+  }
+})
+
 export const slice = createSlice({
   name,
   initialState,
