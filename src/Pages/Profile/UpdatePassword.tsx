@@ -21,7 +21,7 @@ export default function UpdatePassword() {
     <div className="grid md:grid-cols-12 gap-4">
       <div className="col-span-5 h-full">
         <h1 className="text-xl font-semibold capitalize">
-          update
+          update password
         </h1>
       </div>
       <form onSubmit={submit} className="col-span-7">
