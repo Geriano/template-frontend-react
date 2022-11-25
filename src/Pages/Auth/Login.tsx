@@ -31,23 +31,13 @@ export default function Login() {
 
   return (
     <form onSubmit={submit} className="w-full max-w-sm">
-      <Card
-        header={
+      <Card>
+        <Card.Header>
           <div className="flex items-center justify-center text-3xl capitalize font-bold py-4">
             <h1>login</h1>
           </div>
-        }
-        footer={
-          <div className="flex items-center justify-end p-2">
-            <Button disabled={processing} type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
-              <i className="mdi mdi-check" />
-              <p className="capitalize font-medium">
-                login
-              </p>
-            </Button>
-          </div>
-        }
-      >
+        </Card.Header>
+        
         <div className="flex flex-col space-y-2 p-4">
           <Input 
             label="Username"
@@ -70,6 +60,17 @@ export default function Login() {
 
           <p className="text-red-500 text-right">{errors.password}</p>
         </div>
+
+        <Card.Footer>
+          <div className="flex items-center justify-end p-2">
+            <Button disabled={processing} type="submit" className="bg-primary-0 hover:bg-primary-1 active:bg-primary-2 text-white">
+              <i className="mdi mdi-check" />
+              <p className="capitalize font-medium">
+                login
+              </p>
+            </Button>
+          </div>
+        </Card.Footer>
       </Card>
     </form>
   )

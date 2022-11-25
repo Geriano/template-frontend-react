@@ -2,32 +2,29 @@ import classNames from 'classnames'
 import React from 'react'
 
 interface Props {
-  header?: JSX.Element
-  footer?: JSX.Element
   className?: string
 }
 
-export function Card({ className, header, footer, children }: React.PropsWithChildren<Props>) {
+export function Card({ className, children }: React.PropsWithChildren<Props>) {
   return (
-    <div className={classNames("w-full h-full rounded-md bg-white shadow border border-gray-100", className)}>
-      { header && (
-        <div className="bg-gray-100 w-full rounded-t-md">
-          { header }
-        </div>
-      ) }
-      <div 
-        className={classNames("bg-transparent w-full h-full", {
-          'rounded-t-md': !header,
-          'rounded-b-md': !footer,
-        })}
-      >
-        {children}
-      </div>
-      { footer && (
-        <div className="bg-gray-100 full rounded-b-md">
-          { footer }
-        </div>
-      ) }
+    <div className={classNames("w-full h-full rounded-md bg-white shadow-xl border border-gray-100", className)}>
+      {children}
+    </div>
+  )
+}
+
+export const Header = Card.Header = function ({ children }: React.PropsWithChildren) {
+  return (
+    <div className="w-full bg-gray-100 rounded-t-md">
+      {children}
+    </div>
+  )
+}
+
+export const Footer = Card.Footer = function ({ children }: React.PropsWithChildren) {
+  return (
+    <div className="w-full bg-gray-100 rounded-b-md">
+      {children}
     </div>
   )
 }
