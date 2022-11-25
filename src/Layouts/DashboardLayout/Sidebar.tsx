@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector, usePermission, useRole } from "../../hooks";
 import { sidebar } from "../../Store/DashboardLayout";
 import SidebarLink from "./SidebarLink";
 
@@ -8,6 +8,8 @@ export default function Sidebar() {
   const dispatch = useAppDispatch()
   const toggle = () => dispatch(sidebar())
   const APP_NAME = import.meta.env.VITE_APP_NAME
+  const role = useRole()
+  const permission = usePermission()
 
   return (
     <div 
@@ -44,9 +46,15 @@ export default function Sidebar() {
         />
       </div>
 
-      <SidebarLink to="/dashboard">
+      <SidebarLink to="/dashboard" icon="view-dashboard">
         dashboard
       </SidebarLink>
+
+      {role.has(['superuser']) && (
+        <SidebarLink to="/permission">
+          permission
+        </SidebarLink>
+      )}
       
     </div>
   )
