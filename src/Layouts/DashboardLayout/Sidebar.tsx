@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { sidebar } from "../../Store/DashboardLayout";
+import SidebarLink from "./SidebarLink";
 
 export default function Sidebar() {
   const { sidebar: open } = useAppSelector(state => state.DashboardLayout.open)
   const dispatch = useAppDispatch()
   const toggle = () => dispatch(sidebar())
   const APP_NAME = import.meta.env.VITE_APP_NAME
-  
 
   return (
     <div 
@@ -43,6 +43,11 @@ export default function Sidebar() {
           })}
         />
       </div>
+
+      <SidebarLink to="/dashboard">
+        dashboard
+      </SidebarLink>
+      
     </div>
   )
 }
