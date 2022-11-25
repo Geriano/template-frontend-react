@@ -4,6 +4,7 @@ import auth from "./Store/auth";
 import login from "./Store/login";
 import flash from "./Store/flash";
 import profile from "./Store/profile";
+import permission from "./Store/permission";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     login,
     flash,
     profile,
+    permission,
   },
   middleware: middleware => middleware({
     serializableCheck: false,

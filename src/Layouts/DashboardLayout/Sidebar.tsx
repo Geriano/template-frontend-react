@@ -51,11 +51,20 @@ export default function Sidebar() {
       </SidebarLink>
 
       {role.has(['superuser']) && (
-        <SidebarLink to="/permission">
-          permission
-        </SidebarLink>
+        <>
+          <SidebarLink to="/superuser/permission">
+            permission
+          </SidebarLink>
+
+          <SidebarLink to="/superuser/role">
+            role
+          </SidebarLink>
+
+          <SidebarLink to="/superuser/user">
+            user
+          </SidebarLink>
+        </>
       )}
-      
     </div>
   )
 }

@@ -13,17 +13,17 @@ export function Card({ className, children }: React.PropsWithChildren<Props>) {
   )
 }
 
-export const Header = Card.Header = function ({ children }: React.PropsWithChildren) {
+export const Header = Card.Header = function ({ className, children }: React.PropsWithChildren<Props>) {
   return (
-    <div className="w-full bg-gray-100 rounded-t-md">
+    <div className={classNames("w-full bg-gray-100 rounded-t-md", className)}>
       {children}
     </div>
   )
 }
 
-export const Footer = Card.Footer = function ({ children }: React.PropsWithChildren) {
+export const Footer = Card.Footer = function ({ className, children }: React.PropsWithChildren<Props>) {
   return (
-    <div className="w-full bg-gray-100 rounded-b-md">
+    <div className={classNames("w-full bg-gray-100 rounded-b-md", className)}>
       {children}
     </div>
   )

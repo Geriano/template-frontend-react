@@ -5,6 +5,7 @@ interface Props {
   className?: string
   type?: 'button'|'submit'|'reset'
   disabled?: boolean
+  form?: string
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
