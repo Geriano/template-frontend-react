@@ -1,14 +1,16 @@
+import classNames from "classnames";
 import { useEffect } from "react";
 import Button from "../../../Components/Button";
 import Card from "../../../Components/Card";
 import Input from "../../../Components/Input";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector, usePermission } from "../../../hooks";
 import { all, destroy, edit, searching, toggle } from "../../../Store/permission";
 import Form from "./Form";
 
 export default function Permission() {
   const { processing, search, permissions } = useAppSelector(state => state.permission)
   const dispatch = useAppDispatch()
+  const permission = usePermission()
 
   useEffect(() => {
     if (!processing) {
@@ -19,17 +21,22 @@ export default function Permission() {
   return (
     <>
       <Card>
-        <Card.Header className="flex items-center space-x-2 justify-between p-2">
-          <Button.Success 
-            onClick={() => {
-              dispatch(toggle(true))
-            }}
-          >
-            <i className="mdi mdi-plus" />
-            <p className="capitalize font-medium">
-              create
-            </p>
-          </Button.Success>
+        <Card.Header className={classNames("flex items-center space-x-2 p-2", {
+          'justify-between': permission.has('create permission'),
+          'justify-end': !permission.has('create permission'),
+        })}>
+          {permission.has('create permission') && (
+            <Button.Success 
+              onClick={() => {
+                dispatch(toggle(true))
+              }}
+            >
+              <i className="mdi mdi-plus" />
+              <p className="capitalize font-medium">
+                create
+              </p>
+            </Button.Success>
+          )}
 
           <div className="w-full max-w-xs">
             <Input 
@@ -45,32 +52,36 @@ export default function Permission() {
         </Card.Header>
 
         <div className="flex-wrap p-4">
-          {permissions.filter(permission => permission.name.toLowerCase().includes(search.toLowerCase())).map((permission, i) => (
+          {permissions.filter(p => p.name.toLowerCase().includes(search.toLowerCase())).map((p, i) => (
             <Button 
               key={i}
               className="bg-gray-100 m-[1px] cursor-default"
             >
-              <i 
-                onClick={() => {
-                  dispatch(edit(permission))
-                }}
-                className="mdi mdi-pencil bg-primary-0 hover:bg-primary-1 text-white rounded-md px-1 cursor-pointer" 
-              />
+              {permission.has('edit permission') && (
+                <i 
+                  onClick={() => {
+                    dispatch(edit(p))
+                  }}
+                  className="mdi mdi-pencil bg-primary-0 hover:bg-primary-1 text-white rounded-md px-1 cursor-pointer" 
+                />
+              )}
 
               <p className="capitalize font-medium">
-                {permission.name}
+                {p.name}
               </p>
 
-              <i 
-                onClick={() => {
-                  dispatch(destroy(permission.id))
-                    .unwrap()
-                    .finally(() => {
-                      dispatch(all())
-                    })
-                }}
-                className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
-              />
+              {permission.has('delete permission') && (
+                <i 
+                  onClick={() => {
+                    dispatch(destroy(p.id))
+                      .unwrap()
+                      .finally(() => {
+                        dispatch(all())
+                      })
+                  }}
+                  className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
+                />
+              )}
             </Button>
           ))}
         </div>

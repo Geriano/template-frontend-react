@@ -1,14 +1,16 @@
+import classNames from "classnames";
 import { useEffect } from "react";
 import Button from "../../../Components/Button";
 import Card from "../../../Components/Card";
 import Input from "../../../Components/Input";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector, usePermission } from "../../../hooks";
 import { destroy, edit, paginate, searching, toggle } from "../../../Store/role";
 import Form from "./Form";
 
 export default function Role() {
   const { search, paginator } = useAppSelector(state => state.role)
   const dispatch = useAppDispatch()
+  const permission = usePermission()
 
   useEffect(() => {
     dispatch(paginate())
@@ -17,17 +19,22 @@ export default function Role() {
   return (
     <>
       <Card>
-        <Card.Header className="flex items-center space-x-2 justify-between p-2">
-          <Button.Success 
-            onClick={() => {
-              dispatch(toggle(true))
-            }}
-          >
-            <i className="mdi mdi-plus" />
-            <p className="capitalize font-medium">
-              create
-            </p>
-          </Button.Success>
+        <Card.Header className={classNames("flex items-center space-x-2 p-2", {
+          'justify-between': permission.has('create role'),
+          'justify-end': !permission.has('create role'),
+        })}>
+          {permission.has('create role') && (
+            <Button.Success 
+              onClick={() => {
+                dispatch(toggle(true))
+              }}
+            >
+              <i className="mdi mdi-plus" />
+              <p className="capitalize font-medium">
+                create
+              </p>
+            </Button.Success>
+          )}
 
           <div className="w-full max-w-xs">
             <Input 
@@ -83,25 +90,29 @@ export default function Role() {
 
                     <td>
                       <div className="flex items-center space-x-1">
-                        <i 
-                          onClick={() => {
-                            dispatch(edit({
-                              id: role.id,
-                              name: role.name,
-                              permissions: role.permissions.map(permission => permission.id),
-                            }))
-                          }}
-                          className="mdi mdi-pencil bg-primary-0 hover:bg-primary-1 text-white rounded-md px-1 cursor-pointer" 
-                        />
+                        {permission.has('edit role') && (
+                          <i 
+                            onClick={() => {
+                              dispatch(edit({
+                                id: role.id,
+                                name: role.name,
+                                permissions: role.permissions.map(permission => permission.id),
+                              }))
+                            }}
+                            className="mdi mdi-pencil bg-primary-0 hover:bg-primary-1 text-white rounded-md px-1 cursor-pointer" 
+                          />
+                        )}
 
-                        <i 
-                          onClick={() => {
-                            dispatch(destroy(role.id))
-                              .unwrap()
-                              .then(() => dispatch(paginate()))
-                          }}
-                          className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
-                        />
+                        {permission.has('delete role') && (
+                          <i 
+                            onClick={() => {
+                              dispatch(destroy(role.id))
+                                .unwrap()
+                                .then(() => dispatch(paginate()))
+                            }}
+                            className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
+                          />
+                        )}
                       </div>
                     </td>
                   </tr>
