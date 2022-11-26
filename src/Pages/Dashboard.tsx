@@ -7,13 +7,14 @@ import { EChartsOption } from "echarts";
 
 export default function Dashboard() {
   const [urls, setUrls] = useState([] as string[])
-  const [times, setTimes] = useState([] as number[])
+  const [times, setTimes] = useState([] as number[][])
 
   const fetch = () => axios.get(route('superuser.request'))
                             .then(response => {
-                              const { urls, times } = response.data as {
+                              const { urls, times, counts } = response.data as {
                                 urls: string[],
-                                times: number[],
+                                times: number[][],
+                                counts: number[],
                               }
 
                               setUrls(urls)
@@ -34,39 +35,53 @@ export default function Dashboard() {
     }
   }, [])
 
+  const max = Math.max(...times.map(time => Math.max(...time)))
+
   const option: EChartsOption = {
     tooltip: {
       trigger: 'axis',
-      valueFormatter: value => `${value}ms`
+      valueFormatter: value => {
+        return `${value}ms`
+      }
     },
     title: {
-      left: 'center',
       text: 'Request time'
     },
     toolbox: {
       feature: {
+        dataZoom: {
+          yAxisIndex: 'none'
+        },
         saveAsImage: {}
-      }
+      },
     },
+    dataZoom: [
+      {
+        type: 'inside',
+        start: 90,
+        end: 100,
+      },
+      {
+        start: 0,
+        end: 1,
+      },
+    ],
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: urls,
     },
     yAxis: {
       type: 'value',
-      boundaryGap: [0, '100%'],
-      axisLabel: {
-        formatter: '{value}ms',
-      },
+      boundaryGap: false,
+      max,
     },
-    series: [
-      {
-        name: 'Time',
+    series: urls.map((name, i) => {
+      return {
+        name,
         type: 'line',
-        data: times.map(time => time.toFixed(2)),
+        data: times[i],
       }
-    ]
+    }),
   }
 
   return (
@@ -74,6 +89,9 @@ export default function Dashboard() {
       <div className="p-4">
         <ReactECharts 
           option={option}
+          style={{
+            height: 'calc(100vh - 10rem)'
+          }}
         />
       </div>
     </Card>
