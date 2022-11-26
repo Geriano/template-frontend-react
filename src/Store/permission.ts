@@ -193,15 +193,18 @@ export const slice = createSlice({
   extraReducers: builder => {
     const processing = (state: State) => {
       state.processing = true
+      state.errors = initialState.errors
     }
 
     const processed = (state: State) => {
       state.processing = false
       state.open = false
 
-      if (state.form.id || state.form.name) {
-        state.open = true
-      }
+      Object.values(state.errors).forEach(e => {
+        if (e) {
+          state.open = true
+        }
+      })
     }
 
     builder.addCase(all.fulfilled, processed)
