@@ -6,7 +6,7 @@ import { FromValidationErrorResponse } from "../request"
 import { Role as R } from "../Services/Auth"
 import Role, { RoleForm } from "../Services/Superuser/Role"
 import { RootState } from "../store"
-import { success } from "./flash"
+import { success, error as danger } from "./flash"
 import { all } from "./permission"
 
 interface State {
@@ -70,6 +70,13 @@ export const paginate = createAsyncThunk('superuser/role/paginate', async (_, { 
     dispatch(process(false))
     return paginated
   } catch (e) {
+    if (e instanceof AxiosError) {
+      const { status } = e.response!
+
+      if (status === 401) {
+        dispatch(danger('unautorized'))
+      }
+    }
     return rejectWithValue(e as Error)
   }
 })

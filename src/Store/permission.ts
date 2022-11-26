@@ -4,7 +4,7 @@ import { FromValidationErrorResponse } from "../request"
 import { Permission as P } from "../Services/Auth"
 import Permission from '../Services/Superuser/Permission'
 import { RootState } from "../store"
-import { success } from "./flash"
+import { success, error as danger } from "./flash"
 import Swal from 'sweetalert2'
 
 interface State {
@@ -49,10 +49,10 @@ export const all = createAsyncThunk('superuser/permission/all', async (_, api) =
     }
   } catch (e) {
     if (e instanceof AxiosError) {
-      const { status, data } = e.response!
+      const { status } = e.response!
 
       if (status === 401) {
-        console.log('Unauthenticated')
+        api.dispatch(danger('unautorized'))
         return api.rejectWithValue(e)
       } else {
         return api.rejectWithValue(e)
