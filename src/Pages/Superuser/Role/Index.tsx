@@ -1,0 +1,118 @@
+import { useEffect } from "react";
+import Button from "../../../Components/Button";
+import Card from "../../../Components/Card";
+import Input from "../../../Components/Input";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { destroy, edit, paginate, searching, toggle } from "../../../Store/role";
+import Form from "./Form";
+
+export default function Role() {
+  const { search, paginator } = useAppSelector(state => state.role)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(paginate())
+  }, [])
+
+  return (
+    <>
+      <Card>
+        <Card.Header className="flex items-center space-x-2 justify-between p-2">
+          <Button.Success 
+            onClick={() => {
+              dispatch(toggle(true))
+            }}
+          >
+            <i className="mdi mdi-plus" />
+            <p className="capitalize font-medium">
+              create
+            </p>
+          </Button.Success>
+
+          <div className="w-full max-w-xs">
+            <Input 
+              value={search}
+              onInput={e => {
+                dispatch(searching(
+                  (e.target as HTMLInputElement).value
+                ))
+
+                dispatch(paginate())
+              }}
+              color="gray-100"
+              label="Search"
+            />
+          </div>
+        </Card.Header>
+
+        <div className="flex-wrap p-4">
+          <div className="overflow-x-auto border rounded-md">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Name</th>
+                  <th>Permissions</th>
+                  <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginator.data.map((role, i) => (
+                  <tr key={i}>
+                    <td className="text-center font-medium">{i + 1}</td>
+                    <td className="whitespace-nowrap">{role.name}</td>
+                    <td>
+                      {role.permissions.map((permission, i) => (
+                        <Button 
+                          key={i}
+                          className="bg-gray-100 m-[1px] cursor-default"
+                        >
+                          <p className="capitalize font-medium text-xs">
+                            {permission.name}
+                          </p>
+
+                          {/* <i 
+                            onClick={() => {
+                              // 
+                            }}
+                            className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
+                          /> */}
+                        </Button>
+                      ))}
+                    </td>
+
+                    <td>
+                      <div className="flex items-center space-x-1">
+                        <i 
+                          onClick={() => {
+                            dispatch(edit({
+                              id: role.id,
+                              name: role.name,
+                              permissions: role.permissions.map(permission => permission.id),
+                            }))
+                          }}
+                          className="mdi mdi-pencil bg-primary-0 hover:bg-primary-1 text-white rounded-md px-1 cursor-pointer" 
+                        />
+
+                        <i 
+                          onClick={() => {
+                            dispatch(destroy(role.id))
+                              .unwrap()
+                              .then(() => dispatch(paginate()))
+                          }}
+                          className="mdi mdi-delete bg-danger-0 hover:bg-danger-1 text-white rounded-md px-1 cursor-pointer" 
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </Card>
+
+      <Form />
+    </>
+  )
+}

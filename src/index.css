@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+table {
+  @apply w-full border-collapse;
+}
+
+thead {
+  @apply bg-gray-100
+}
+
+th {
+  @apply px-3 py-1 text-primary-0 text-center font-medium
+}
+
+td {
+  @apply px-2 py-1
+}
+
+tr {
+  @apply border-b
+}
+
+tr td {
+  @apply border
+}
+
+tbody tr {
+  @apply hover:bg-gray-50 transition-all duration-300
+}
+
+tbody tr:nth-child(even) {
+  @apply bg-gray-50
+}
