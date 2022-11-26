@@ -86,6 +86,8 @@ export const updateGeneralInformation = createAsyncThunk('profile/update/informa
 
     api.dispatch(relog())
     api.dispatch(clearError('general'))
+    api.dispatch(resetForm('general'))
+    api.dispatch(setGeneralInformationFromUser())
   } catch (e) {
     if (e instanceof AxiosError) {
       const { status, data } = e.response!
