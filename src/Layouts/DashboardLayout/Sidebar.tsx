@@ -52,15 +52,15 @@ export default function Sidebar() {
 
       {role.has(['superuser']) && (
         <>
-          <SidebarLink to="/superuser/permission">
+          <SidebarLink to="/superuser/permission" icon="key">
             permission
           </SidebarLink>
 
-          <SidebarLink to="/superuser/role">
+          <SidebarLink to="/superuser/role" icon="account-lock-open">
             role
           </SidebarLink>
 
-          <SidebarLink to="/superuser/user">
+          <SidebarLink to="/superuser/user" icon="account-group">
             user
           </SidebarLink>
         </>
