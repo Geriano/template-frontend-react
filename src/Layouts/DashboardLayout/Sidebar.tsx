@@ -13,7 +13,7 @@ export default function Sidebar() {
 
   return (
     <div 
-      className={classNames("absolute md:static flex-none h-screen overflow-y-auto bg-primary-0 text-white transition-all duration-300 shadow-xl z-10", {
+      className={classNames("absolute md:static flex-none h-screen overflow-y-auto bg-primary-0 text-white transition-all duration-300 shadow-xl z-30", {
         'w-full md:w-56': open,
         '-left-14 w-14': !open,
       })}
