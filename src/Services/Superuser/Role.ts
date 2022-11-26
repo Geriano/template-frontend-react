@@ -22,6 +22,11 @@ export interface RoleForm {
 }
 
 export default {
+  all: async () => {
+    const { data } = await axios.get(route('role.all'))
+
+    return data as Role[]
+  },
   paginate: async (search: string, order: Order, { current_page, per_page }: Paginator<Role>['meta']) => {
     const { data: response } = await axios.post(route('role.paginate'), {
       page: current_page,

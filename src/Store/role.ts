@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
 import Swal from "sweetalert2"
-import { Paginator } from "../paginator"
+import { initial, Paginator } from "../paginator"
 import { FromValidationErrorResponse } from "../request"
 import { Role as R } from "../Services/Auth"
 import Role, { RoleForm } from "../Services/Superuser/Role"
 import { RootState } from "../store"
 import { success, error as danger } from "./flash"
-import { all } from "./permission"
+import { all as getAllPermission } from "./permission"
 
 interface State {
   processing: boolean
@@ -18,6 +18,7 @@ interface State {
   open: boolean
   search: string
   paginator: Paginator<R>
+  roles: R[]
 }
 
 export const name = 'role'
@@ -35,21 +36,17 @@ export const initialState: State = {
   },
   open: false,
   search: '',
-  paginator: {
-    meta: {
-      total: 0,
-      current_page: 1,
-      first_page: 1,
-      first_page_url: null,
-      last_page: 1,
-      last_page_url: null,
-      next_page_url: null,
-      per_page: 10,
-      previous_page_url: null,
-    },
-    data: [],
-  },
+  paginator: initial,
+  roles: []
 }
+
+export const all = createAsyncThunk('superuser/role/all', async (_, { dispatch, rejectWithValue }) => {
+  try {
+    return await Role.all()
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 
 export const paginate = createAsyncThunk('superuser/role/paginate', async (_, { dispatch, rejectWithValue, getState }) => {
   const { role, permission } = getState() as RootState
@@ -64,7 +61,7 @@ export const paginate = createAsyncThunk('superuser/role/paginate', async (_, { 
     const paginated = await Role.paginate(search, { dir: 'asc', name: 'name' }, paginator.meta)
 
     if (permission.permissions.length === 0) {
-      dispatch(all())
+      dispatch(getAllPermission())
     }
 
     dispatch(process(false))
@@ -237,6 +234,10 @@ export const slice = createSlice({
     builder.addCase(destroy.pending, processing)
     builder.addCase(destroy.fulfilled, processed)
     builder.addCase(destroy.rejected, processed)
+
+    builder.addCase(all.fulfilled, (state: State, { payload }: PayloadAction<R[]>) => {
+      state.roles = payload
+    })
   },
 })
 
