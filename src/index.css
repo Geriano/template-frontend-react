@@ -33,3 +33,7 @@ tbody tr {
 tbody tr:nth-child(even) {
   @apply bg-gray-50
 }
+
+input:focus {
+  @apply focus:ring-0 focus:outline-none
+}

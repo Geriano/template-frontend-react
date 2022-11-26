@@ -27,7 +27,7 @@ export default function Form() {
       </Modal.Header>
 
       <Modal.Body>
-        <form onSubmit={submit} id="form">
+        <form onSubmit={submit} id="form" className="text-sm">
           <div className="flex flex-col space-y-2">
             <div className="flex flex-col space-y-1">
               <Input 
@@ -74,7 +74,7 @@ export default function Form() {
         </form>
       </Modal.Body>
 
-      <Modal.Footer className="px-2 py-1">
+      <Modal.Footer className="px-2 py-1 text-sm">
         <div className="flex items-center justify-end w-full">
           <Primary disabled={processing} onClick={submit} type="button" form="form" className="px-6 py-2">
             <p className="capitalize font-medium">

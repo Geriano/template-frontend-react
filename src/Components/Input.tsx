@@ -20,7 +20,7 @@ export default function Input(props: Props) {
       <input 
         type="text" 
         {...props}
-        className="block px-2.5 pb-2 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        className="block px-2.5 pb-2 pt-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         placeholder=" " 
       />
       <label 

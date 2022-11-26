@@ -19,6 +19,7 @@ import Login from './Pages/Auth/Login';
 import Profile from './Pages/Profile/Index';
 import Permission from './Pages/Superuser/Permission/Index';
 import Role from './Pages/Superuser/Role/Index';
+import User from './Pages/Superuser/User/Index'
 
 axios.defaults.headers['Content-Type'] = 'multipart/form-data'
 window.axios = axios
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path='/profile' element={<Profile />} />
               <Route path='/superuser/permission' element={<Permission />} />
               <Route path='/superuser/role' element={<Role />} />
+              <Route path='/superuser/user' element={<User />} />
             </Route>
 
             <Route path='/' element={<AuthLayout />}>

@@ -13,3 +13,18 @@ export interface Paginator<T> {
   }
   data: T[]
 }
+
+export const initial = {
+  meta: {
+    total: 0,
+    current_page: 1,
+    first_page: 1,
+    first_page_url: null,
+    last_page: 1,
+    last_page_url: null,
+    next_page_url: null,
+    per_page: 10,
+    previous_page_url: null,
+  },
+  data: [],
+}
