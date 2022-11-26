@@ -104,5 +104,8 @@
         "required": true
       }
     }
+  },
+  "superuser.request": {
+    "path": "/superuser/request"
   }
 }

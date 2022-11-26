@@ -27,6 +27,8 @@ export interface Routes {
   "user.store": Route,
   "user.update": RouteWithParam<'id'>,
   "user.destroy": RouteWithParam<'id'>,
+
+  "superuser.request": Route,
 }
 
 declare const routes: Routes
