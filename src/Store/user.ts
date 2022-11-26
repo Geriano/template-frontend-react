@@ -60,14 +60,8 @@ export const paginate = createAsyncThunk('superuser/user/paginate', async (_, { 
 
     dispatch(process(true))
     const paginated = await User.paginate(search, { dir: 'asc', name: 'name' }, paginator.meta)
-
-    if (permission.permissions.length === 0) {
-      dispatch(getAllPermission())
-    }
-
-    if (role.roles.length === 0) {
-      dispatch(getAllRole())
-    }
+    await dispatch(getAllPermission()).unwrap()
+    await dispatch(getAllRole()).unwrap()
 
     dispatch(process(false))
     return paginated
