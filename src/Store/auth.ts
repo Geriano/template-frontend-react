@@ -1,14 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import Auth, { User } from "../Services/Auth"
+import Auth from "../Services/Auth"
 import { RootState } from "../store"
 import axios from 'axios'
-
-export interface State {
-  processing: boolean
-  authenticated: boolean
-  user: User
-  token: string
-}
+import { User } from "../Interfaces/User"
+import { State } from "../Interfaces/Auth"
 
 export const relog = createAsyncThunk('auth/relog', async (_, api) => {
   const { auth } = api.getState() as RootState

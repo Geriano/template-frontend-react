@@ -1,57 +1,7 @@
 import axios from "axios"
 import route from "../route"
-
-export interface Permission {
-  id: number
-  name: string
-}
-
-export interface Role {
-  id: number
-  name: string
-  permissions: Permission[]
-}
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  username: string
-  profile_photo_url: string
-  permissions: Permission[]
-  roles: Role[]
-}
-
-export interface RegisterParameter {
-  name: string
-  email: string
-  username: string
-  password: string
-  password_confirmation: string
-}
-
-export interface RegisterResponse {
-  message: string
-}
-
-export interface LoginParameter {
-  username: string
-  password: string
-}
-
-export interface LoginResponse {
-  user: User
-  token: string
-}
-
-export interface LogoutResponse {
-  message: string
-}
-
-export interface Response<T> {
-  status: number
-  response: T
-}
+import { LoginParameter, LoginResponse, LogoutResponse, RegisterParameter, RegisterResponse, Response } from "../Interfaces/Auth"
+import { User } from "../Interfaces/User"
 
 export async function login(form: LoginParameter) {
   const { status, data: response } = await axios.post(route('login'), form)
