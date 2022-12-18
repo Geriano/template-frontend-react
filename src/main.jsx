@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import './index.css'
 import axios from 'axios';
+import './request'
 
 import DashboardLayout from './Layouts/DashboardLayout';
 import Dashboard from './Pages/Dashboard';

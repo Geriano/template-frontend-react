@@ -1,68 +1,15 @@
-import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosResponse } from "axios";
 
-export interface FromValidationErrorResponse<T = string> {
-  errors: {
-    field: T
-    message: string
-  }[]
+export const success = (response: AxiosResponse) => {
+  return response
 }
 
-export async function get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-  try {
-    return await axios.get(url, config)
-  } catch (e) {
-    if (e instanceof AxiosError && e.status === 401) {
-      // 
-    }
-
-    throw e
+export const error = (e: AxiosError) => {
+  if (e.response?.status === 401) {
+    window.location.reload()
   }
+  
+  throw e
 }
 
-export async function post<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-  try {
-    return await axios.post(url, config)
-  } catch (e) {
-    if (e instanceof AxiosError && e.status === 401) {
-      // 
-    }
-
-    throw e
-  }
-}
-
-export async function put<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-  try {
-    return await axios.put(url, config)
-  } catch (e) {
-    if (e instanceof AxiosError && e.status === 401) {
-      // 
-    }
-
-    throw e
-  }
-}
-
-export async function patch<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-  try {
-    return await axios.patch(url, config)
-  } catch (e) {
-    if (e instanceof AxiosError && e.status === 401) {
-      // 
-    }
-
-    throw e
-  }
-}
-
-export async function del<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
-  try {
-    return await axios.delete(url, config)
-  } catch (e) {
-    if (e instanceof AxiosError && e.status === 401) {
-      // 
-    }
-
-    throw e
-  }
-}
+axios.interceptors.response.use(success, error)
