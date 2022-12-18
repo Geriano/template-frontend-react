@@ -1,26 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
-import { FromValidationErrorResponse } from "../request"
-import Profile, { GeneralInformationForm, UpdatePasswordForm } from "../Services/Profile"
+import Profile from "../Services/Profile"
 import { RootState } from "../store"
 import { relog } from "./auth"
 import { success } from "./flash"
-
-interface State {
-  processing: boolean
-  general: {
-    form: GeneralInformationForm
-    errors: {
-      [key in keyof GeneralInformationForm]: string
-    }
-  }
-  password: {
-    form: UpdatePasswordForm
-    errors: {
-      [key in keyof UpdatePasswordForm]: string
-    }
-  }
-}
+import { GeneralInformationForm, State, UpdatePasswordForm } from "../Interfaces/Profile"
+import { FromValidationErrorResponse } from "../Interfaces/ErrorResponse"
 
 export const name = 'profile'
 export const initialState: State = {

@@ -1,18 +1,6 @@
 import axios from 'axios'
 import route from '../route'
-
-export interface GeneralInformationForm {
-  photo: File|null
-  name: string
-  email: string
-  username: string
-}
-
-export interface UpdatePasswordForm {
-  current_password: string
-  password: string
-  password_confirmation: string
-}
+import { GeneralInformationForm, UpdatePasswordForm } from '../Interfaces/Profile'
 
 export const updateGeneralInformation = async (form: GeneralInformationForm) => {
   const { status, data: response } = await axios.patch(route('update-user-general-information'), form)
