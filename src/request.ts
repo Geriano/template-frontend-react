@@ -13,3 +13,8 @@ export const error = (e: AxiosError) => {
 }
 
 axios.interceptors.response.use(success, error)
+axios.defaults.headers['Content-Type'] = 'multipart/form-data'
+
+Object.defineProperty(window, 'axios', {
+  value: axios,
+})
