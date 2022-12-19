@@ -1,23 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store"
-
-type t = 'success'|'error'|'info'|'warning'
-
-type Flash = null | {
-  type: t
-  message: string
-}
-
-interface State {
-  value: Flash[]
-}
+import { State, t } from "../Interfaces/Flash"
 
 export const name = 'flash'
 export const initialState: State = {
   value: []
 }
-
-type Action = PayloadAction<string>
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
