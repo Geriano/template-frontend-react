@@ -1,4 +1,4 @@
-import { Paginator } from "../paginator"
+import { Paginator } from "./paginator"
 import { Permission } from "./Permission"
 
 export interface Role {

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
 import Swal from "sweetalert2"
-import { initial, Paginator } from "../paginator"
+import { initial, Paginator } from "../Interfaces/paginator"
 import { State, User as U, UserForm } from "../Interfaces/User"
 import User from "../Services/Superuser/User"
 import { RootState } from "../store"

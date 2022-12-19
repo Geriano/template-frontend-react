@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Paginator } from "../../paginator";
+import { Paginator } from "../../Interfaces/paginator";
 import route from "../../route";
 import { Order, Response, User, UserForm } from "../../Interfaces/User";
 
