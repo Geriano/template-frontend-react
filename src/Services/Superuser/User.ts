@@ -1,30 +1,7 @@
 import axios from "axios";
 import { Paginator } from "../../paginator";
 import route from "../../route";
-import { User } from "../Auth";
-
-interface Order {
-  dir: 'asc'|'desc',
-  name: 'name'|'email'|'username'
-}
-
-interface Response {
-  status: number
-  response: {
-    message: string
-  }
-}
-
-export interface UserForm {
-  id: number|null
-  name: string
-  email: string
-  username: string
-  password: string
-  password_confirmation: string
-  permissions: number[]
-  roles: number[]
-}
+import { Order, Response, User, UserForm } from "../../Interfaces/User";
 
 export default {
   paginate: async (search: string, order: Order, { current_page, per_page }: Paginator<User>['meta']) => {
