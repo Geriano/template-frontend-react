@@ -3,19 +3,9 @@ import Auth from "../Services/Auth"
 import { RootState } from "../store"
 import { authenticate } from "./auth"
 import { AxiosError } from 'axios'
-import { FromValidationErrorResponse } from "../request"
 import * as flash from './flash'
-
-interface State {
-  processing: boolean
-  form: {
-    username: string
-    password: string
-  }
-  errors: {
-    [key in keyof State['form']]: string
-  }
-}
+import { FromValidationErrorResponse } from "../Interfaces/ErrorResponse"
+import { State } from "../Interfaces/Login"
 
 export const login = createAsyncThunk('auth/login', async (_, api) => {
   const { login } = api.getState() as RootState
@@ -32,9 +22,9 @@ export const login = createAsyncThunk('auth/login', async (_, api) => {
       const { status, data } = e.response!
 
       if (status === 422) {
-        const { errors } = data as FromValidationErrorResponse
+        const { errors } = data as FromValidationErrorResponse<keyof State['form']>
         errors.forEach(e => api.dispatch(error({
-          field: e.field as keyof State['form'],
+          field: e.field,
           value: e.message,
         })))
       } else if (status === 401) {
