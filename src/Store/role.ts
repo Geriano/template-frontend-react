@@ -2,24 +2,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
 import Swal from "sweetalert2"
 import { initial, Paginator } from "../paginator"
-import { FromValidationErrorResponse } from "../request"
-import { Role as R } from "../Services/Auth"
-import Role, { RoleForm } from "../Services/Superuser/Role"
+import { Role as R, State } from "../Interfaces/Role"
+import Role from "../Services/Superuser/Role"
 import { RootState } from "../store"
 import { success, error as danger } from "./flash"
 import { all as getAllPermission } from "./permission"
-
-interface State {
-  processing: boolean
-  form: RoleForm,
-  errors: {
-    [key in keyof RoleForm]: string
-  }
-  open: boolean
-  search: string
-  paginator: Paginator<R>
-  roles: R[]
-}
+import { FromValidationErrorResponse } from "../Interfaces/ErrorResponse"
 
 export const name = 'role'
 export const initialState: State = {

@@ -1,25 +1,7 @@
 import axios from "axios";
 import { Paginator } from "../../paginator";
 import route from "../../route";
-import { Role } from "../Auth";
-
-interface Order {
-  dir: 'asc'|'desc',
-  name: 'name'
-}
-
-interface Response {
-  status: number
-  response: {
-    message: string
-  }
-}
-
-export interface RoleForm {
-  id: number|null
-  name: string
-  permissions: number[]
-}
+import { Order, Response, Role, RoleForm } from "../../Interfaces/Role";
 
 export default {
   all: async () => {
