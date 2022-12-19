@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
-import { FromValidationErrorResponse } from "../request"
-import { Permission as P } from "../Services/Auth"
+import { Permission as P } from "../Interfaces/Permission"
 import Permission from '../Services/Superuser/Permission'
 import { RootState } from "../store"
 import { success, error as danger } from "./flash"
 import Swal from 'sweetalert2'
+import { FromValidationErrorResponse } from "../Interfaces/ErrorResponse"
 
 interface State {
   processing: boolean

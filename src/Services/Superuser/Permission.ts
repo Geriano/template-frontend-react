@@ -1,17 +1,6 @@
 import axios from "axios"
 import route from "../../route"
-import { Permission } from "../Auth"
-
-interface Response {
-  status: number
-  response: {
-    message: string
-  }
-}
-
-interface PermissionForm {
-  name: string
-}
+import { Permission, PermissionForm, Response } from "../../Interfaces/Permission"
 
 export default {
   all: async () => {
