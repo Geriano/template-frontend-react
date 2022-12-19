@@ -16,6 +16,8 @@ const boot = async () => {
 }
 
 const start = async () => {
+  const NotFound = await import('./Pages/NotFound').then(r => r.default)
+
   const DashboardLayout = await import('./Layouts/DashboardLayout').then(r => r.default)
   const Dashboard = await import('./Pages/Dashboard').then(r => r.default)
   const AuthLayout = await import('./Layouts/AuthLayout').then(r => r.default)
@@ -30,7 +32,7 @@ const start = async () => {
       <Provider store={store}>
         <RouterProvider router={
           createBrowserRouter(createRoutesFromElements(
-            <>
+            <Route errorElement={<NotFound />}>
               <Route path='/' element={<DashboardLayout />}>
                 <Route path='/' element={<Navigate to="/dashboard" />} />
                 <Route path='/dashboard' element={<Dashboard />} />
@@ -43,7 +45,7 @@ const start = async () => {
               <Route path='/' element={<AuthLayout />}>
                 <Route path='/login' element={<Login />} />
               </Route>
-            </>
+            </Route>
           ))
         } />
       </Provider>
