@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { LegacyRef, Ref, useEffect, useRef, useState } from "react";
+import React, { LegacyRef, useRef, useState } from "react";
 import { useAppSelector } from "../../hooks";
 import { Transition } from "react-transition-group";
 import { TransitionStatus } from "react-transition-group/Transition";
