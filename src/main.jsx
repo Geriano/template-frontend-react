@@ -21,11 +21,13 @@ const start = async () => {
   const DashboardLayout = await import('./Layouts/DashboardLayout').then(r => r.default)
   const Dashboard = await import('./Pages/Dashboard').then(r => r.default)
   const AuthLayout = await import('./Layouts/AuthLayout').then(r => r.default)
-  const Login = await import('./Pages/Auth/Login').then(r => r.default)
   const Profile = await import('./Pages/Profile/Index').then(r => r.default)
   const Permission = await import('./Pages/Superuser/Permission/Index').then(r => r.default)
   const Role = await import('./Pages/Superuser/Role/Index').then(r => r.default)
   const User = await import('./Pages/Superuser/User/Index').then(r => r.default)
+  
+  const Login = await import('./Pages/Auth/Login').then(r => r.default)
+  const Register = await import('./Pages/Auth/Register').then(r => r.default)
 
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
@@ -44,6 +46,7 @@ const start = async () => {
 
               <Route path='/' element={<AuthLayout />}>
                 <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
               </Route>
             </Route>
           ))

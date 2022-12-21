@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import DashboardLayout from "./Store/DashboardLayout";
 import auth from "./Store/auth";
 import login from "./Store/login";
+import register from "./Store/register";
 import flash from "./Store/flash";
 import profile from "./Store/profile";
 import permission from "./Store/permission";
@@ -13,6 +14,7 @@ export const store = configureStore({
     DashboardLayout,
     auth,
     login,
+    register,
     flash,
     profile,
     permission,
