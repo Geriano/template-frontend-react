@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { useAppDispatch, useAppSelector, usePermission, useRole } from "../../hooks";
 import { sidebar } from "../../Store/DashboardLayout";
 import SidebarLink from "./SidebarLink";
+import SidebarDropdown from "./SidebarDropdown";
 
 export default function Sidebar() {
   const { sidebar: open } = useAppSelector(state => state.DashboardLayout.open)
@@ -51,7 +52,7 @@ export default function Sidebar() {
       </SidebarLink>
 
       {role.has(['superuser']) && (
-        <>
+        <SidebarDropdown label="Builtin">
           <SidebarLink to="/superuser/permission" icon="key">
             permission
           </SidebarLink>
@@ -63,7 +64,7 @@ export default function Sidebar() {
           <SidebarLink to="/superuser/user" icon="account-group">
             user
           </SidebarLink>
-        </>
+        </SidebarDropdown>
       )}
     </div>
   )
