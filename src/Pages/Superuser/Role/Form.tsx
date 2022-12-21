@@ -21,7 +21,7 @@ export default function Form() {
   }
 
   return (
-    <Modal show={open} onClose={() => dispatch(toggle(false))} size="md">
+    <Modal show={open} onClose={() => dispatch(toggle(false))} size="md" position="top-center">
       <Modal.Header>
         { form.id ? 'Update' : 'Create' }
       </Modal.Header>
