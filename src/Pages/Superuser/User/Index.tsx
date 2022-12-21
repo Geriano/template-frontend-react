@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector, usePermission } from "../../../hooks";
 import route from "../../../route";
 import { destroy, edit, paginate, searching, toggle } from "../../../Store/user";
 import Form from "./Form";
+import { Breadcrumb } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function User() {
   const { search, paginator } = useAppSelector(state => state.user)
@@ -19,6 +21,22 @@ export default function User() {
 
   return (
     <>
+      <div className="flex items-center justify-end">
+        <Breadcrumb className="w-fit">
+          <Link to="/">
+            <Breadcrumb.Item icon={() => <i className="mdi mdi-home mr-1"></i>}>
+              Home
+            </Breadcrumb.Item>
+          </Link>
+          <Breadcrumb.Item href="#">
+            Builtin
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            User
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+
       <Card>
         <Card.Header className={classNames("flex items-center space-x-2 p-2", {
           'justify-between': permission.has('create user'),

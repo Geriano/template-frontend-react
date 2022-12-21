@@ -6,6 +6,8 @@ import Input from "../../../Components/Input";
 import { useAppDispatch, useAppSelector, usePermission } from "../../../hooks";
 import { destroy, edit, paginate, searching, toggle } from "../../../Store/role";
 import Form from "./Form";
+import { Breadcrumb } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 export default function Role() {
   const { search, paginator } = useAppSelector(state => state.role)
@@ -18,6 +20,22 @@ export default function Role() {
 
   return (
     <>
+      <div className="flex items-center justify-end">
+        <Breadcrumb className="w-fit">
+          <Link to="/">
+            <Breadcrumb.Item icon={() => <i className="mdi mdi-home mr-1"></i>}>
+              Home
+            </Breadcrumb.Item>
+          </Link>
+          <Breadcrumb.Item href="#">
+            Builtin
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            Role
+          </Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+
       <Card>
         <Card.Header className={classNames("flex items-center space-x-2 p-2", {
           'justify-between': permission.has('create role'),
