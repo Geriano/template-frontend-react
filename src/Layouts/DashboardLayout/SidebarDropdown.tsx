@@ -33,10 +33,17 @@ export default function SidebarDropdown({ label, icon, children }: React.PropsWi
         >
           <i className={`mdi mdi-${icon || 'circle'}`} />
           {open && (
-            <p className="capitalize font-medium">
-              {label}
-            </p>
+            <div className="w-full">
+              <p className="capitalize font-medium">
+                {label}
+              </p>
+            </div>
           )}
+          <div className={classNames("flex-none transition-all duration-300", {
+            'rotate-90': !show,
+          })}>
+            <i className="mdi mdi-menu-down"></i>
+          </div>
         </div>
       </div>
 
