@@ -17,7 +17,7 @@ export default function SidebarDropdown({ label, icon, children }: React.PropsWi
   const toggle = () => setShow(!show)
 
   return (
-    <div className={classNames("flex flex-col space-y-1")}>
+    <div className={classNames("flex flex-col")}>
       <div
         className={classNames("hover:bg-primary-1 transition-all duration-300 cursor-pointer", {
           'px-2': open,
@@ -49,7 +49,7 @@ export default function SidebarDropdown({ label, icon, children }: React.PropsWi
         {(state: TransitionStatus) => {
           console.log(state)
           return (
-            <div ref={el as LegacyRef<HTMLDivElement>|undefined} className={classNames("flex flex-col space-y-1 transition-all", {
+            <div ref={el as LegacyRef<HTMLDivElement>|undefined} className={classNames("flex flex-col transition-all", {
               '-translate-x-full opacity-0': state === 'exiting',
               '-translate-x-0 opacity-100': state === 'entering',
               'h-0 overflow-hidden': ['exiting', 'exited',].includes(state),
